@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laya WebGPU Studio | In-Browser System 1 Decision Engine</title>
+  <link rel="stylesheet" href="./src/style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Laya WebGPU Studio</h1>
+      <p class="subtitle">非自己回帰型 System 1 意思決定エンジン (In-Browser WebGPU / WASM)</p>
+      <div class="status-badge" id="hw-status">
+        <span class="status-dot" id="hw-dot"></span>
+        <span id="hw-text">Checking WebGPU Acceleration...</span>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- Input Section -->
+      <section class="card">
+        <h2>📝 入力と質問設定</h2>
+        
+        <label>プリセットから選択:</label>
+        <div class="preset-bar">
+          <button class="preset-btn active" data-preset="support">サポート振り分け</button>
+          <button class="preset-btn" data-preset="safety">安全性・スパム</button>
+          <button class="preset-btn" data-preset="japanese">日本語障害報告</button>
+        </div>
+
+        <label for="input-state">対象テキスト (State):</label>
+        <textarea id="input-state" rows="4" placeholder="判定したいテキストを入力してください..."></textarea>
+
+        <label for="input-questions">質問定義 (Typed Questions JSON):</label>
+        <textarea id="input-questions" rows="9" spellcheck="false"></textarea>
+
+        <button class="btn-primary" id="run-btn">
+          <span>🚀 WebGPU で推論実行 (Single Forward Pass)</span>
+        </button>
+      </section>
+
+      <!-- Output Section -->
+      <section class="card">
+        <h2>⚡ リアルタイム判定結果</h2>
+
+        <div class="metrics">
+          <div class="metric-pill">
+            <div class="metric-val" id="metric-latency">-- ms</div>
+            <div class="metric-lbl">推論所要時間</div>
+          </div>
+          <div class="metric-pill">
+            <div class="metric-val" id="metric-model">--</div>
+            <div class="metric-lbl">選択モデル</div>
+          </div>
+          <div class="metric-pill">
+            <div class="metric-val" id="metric-provider">--</div>
+            <div class="metric-lbl">実行プロバイダ</div>
+          </div>
+        </div>
+
+        <div id="results-container">
+          <p style="color: var(--text-muted); text-align: center; margin-top: 2rem;">
+            「推論実行」をクリックすると、ブラウザ上のWebGPUで高速判定が実行されます。
+          </p>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>
